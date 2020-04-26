@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% if request.resolver_match.url_name == 'create' %}
+        <h2>리뷰를 작성해 주세요.</h2>
+    {% else %}
+        <h2>수정하기</h2>
+    {% endif %}
+    <div class="text-center">
+        <form action = "" method="POST">
+            {% csrf_token %}
+            <p>TITLE<br>{{ form.title }}</p>
+            <p>MOVIE_TITLE<br>{{ form.movie_title }}</p>
+            <p>RANK(1 to 5)<br>{{ form.rank }}</p>
+            <p>CONTENT<br>{{ form.content }}</p>
+            <input type="submit">
+        </form>
+    </div>
+
+
+{% endblock %}

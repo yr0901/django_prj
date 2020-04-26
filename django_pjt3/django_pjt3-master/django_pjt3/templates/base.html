@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <!--Navbar-->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'community:index'%}">MOVIE</a>
+  {% if user.is_authenticated %}
+    <p class='d-inline-block m-0'style='color:white; font-size:10px;'>{{user.username}}님 환영합니다!</p>
+  {% endif%}
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <a class="nav-link" href="{% url 'community:index' %}">Home</a>
+      </li>
+      {%if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:mypage' user.pk %}">My Page</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:logout' %}">Log out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'community:create' %}">New</a>
+        </li>
+      {%else%}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:login' %}">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:signup' %}">Sign up</a>
+        </li>
+
+      {% endif%}
+
+
+
+    </ul>
+  </div>
+</nav>
+    <div class='container'>
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+<h2>My Page</h2>
+<hr>
+<label>내가 쓴 글</label>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">영화 제목</th>
+      <th scope="col">글 제목</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for review in reviews %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{review.movie_title}}</td>
+      <td>{{review.title}}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td>아직 리뷰를 작성하지 않았습니다.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<hr>
+
+<label>내가 쓴 댓글</label>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">내 댓글</th>
+      <th scope="col">댓글 단 글</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comment in comments %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{comment.content}}</td>
+      <td>{{comment.review_id}}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td>아직 리뷰를 작성하지 않았습니다.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

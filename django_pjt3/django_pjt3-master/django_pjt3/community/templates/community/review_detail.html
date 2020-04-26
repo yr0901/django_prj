@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<h2>DETAIL</h2>
+	<hr>
+	<h3>{{ review.pk }}번글</h3>
+	<p>등수 : {{ review.rank }}</p>
+	<p>제목: {{ review.title }}</p>
+	<p>내용: {{ review.content }}</p>
+	<p>생성 시각: {{ review.created_at }}</p>
+	<p>수정 시각: {{ review.updated_at }}</p>
+	<a href="{% url 'community:index' %}">BACK</a>
+	<hr>
+
+	<form action="{% url 'community:delete' review.pk %}" method="POST">
+		{% csrf_token %}
+		<input type="submit" value="삭제">
+	</form>
+	<button><a href="{% url 'community:update' review.pk %}">수정</a></button>
+	<hr>
+	<form action="{% url 'community:comments_create' review.pk %}" method = 'POST'>
+		{% csrf_token %}
+		{{ comment_form }}
+		<button>댓글입력</button>
+	</form>
+	<hr>
+	<h4>댓글 목록</h4>
+	{% for comment in comments %}
+		<ul>
+			<li>{{ comment.content }}/
+			<form action='{% url "community:comments_delete" comment.pk review.pk %}' method = 'POST' style='display:inline'>
+				{% csrf_token %}
+				<button>댓글 삭제</button>
+			</li>
+		</ul>
+		{% empty %}
+		<p>댓글이 아직 없습니다.</p>
+	{% endfor %}
+{% endblock %}
