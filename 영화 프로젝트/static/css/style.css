@@ -1,0 +1,18 @@
+* {
+  margin:0;
+  font-family: 'Comic Neue', cursive;
+  font-family: 'Sunflower', sans-serif;
+}
+
+#bgimg {
+  width:100%;
+  filter : brightness(50%)
+}
+
+#main_title {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:white;
+}

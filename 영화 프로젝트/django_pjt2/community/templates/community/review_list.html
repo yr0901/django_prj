@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+{% if some_flag %}
+
+   <script>
+     alert('비정상적인 접근입니다. HOME으로 돌아갑니다.')
+   </script>
+
+{% endif %}
+
+<div class='position-relative d-flex justify-content-center'>
+  <img class='mb-4' id='bgimg' src='https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'>
+  <h1 class='display-2 position-absolute text-white' id='main_title'>MOVIE REVIEW</h1>
+</div>
+<div class='container'>
+  <div class='row'>
+    <div class='col-12 text-center'>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">TITLE</th>
+            <th scope='col'>DATE</th>
+          </tr>
+        </thead>
+        <tbody style="font-family: 'Sunflower', sans-serif;">
+          {% for review in reviews %}
+          <tr>
+            <th scope="row">{{review.pk}}</th>
+            <td><a href="{% url 'community:detail' review.pk %}">{{review.title}}</a></td>
+            {% if review.update_at %}
+              <th scope="row">{{review.updated_at}}</th>
+            {% else %}
+              <th scope="row">{{review.created_at}}</th>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

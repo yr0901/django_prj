@@ -1,0 +1,14 @@
+<!-- Q1-5 -->
+<!-- 요청 url의 이름을 기준으로 분기를 나눠야 하기 때문에 .resolver_match.url_name을 이용한다 -->
+{% if request.resolver_match.url_name == 'signup' %}
+<h1>Signup</h1>
+{% elif request.resolver_match.url_name == 'login' %}
+<h1>Login</h1>
+{% endif %}
+
+<form action="" method="POST">
+
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">
+</form>

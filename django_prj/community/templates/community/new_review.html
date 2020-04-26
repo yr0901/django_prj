@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class='container d-flex flex-column'>
+  <div>
+    <h1>리뷰 작성</h1>
+    <hr>
+  </div>
+  <div>
+    <form action='/community/create_review/'>
+      <div class='mb-4'>
+        <label class='d-block'>제목</label>
+        <input class="form-control" type="text" placeholder="제목을 입력해주세요" name='title'>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">내용</label>
+        <textarea name='content' placeholder='내용을 입력해주세요'class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+      </div>
+
+      <div class='mb-4'>
+        <label for="rank">평점</label>
+        <input class='rounded' type='number' name='rank' max=10 min=0>
+
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary mb-2">리뷰 등록하기</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

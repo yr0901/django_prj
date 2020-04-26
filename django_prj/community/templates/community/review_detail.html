@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class='container mt-4'>
+
+  <div class="jumbotron p-5">
+    <h1 class="display-8">{{ review.title }}</h1>
+    <p class="lead p-2">{{review.content}}</p>
+    <hr class="my-4">
+    <div class='d-flex justify-content-between mb-5'>
+      <span><h5>평점 : {{review.rank}}</h5></span>
+      <span>작성시간 : {{review.created_at}}</span>
+    </div>
+    <a class="btn btn-primary btn-lg" href="/community/delete/{{review.pk}}" role="button">삭제하기</a>
+    <a class="btn btn-primary btn-lg" href="/community/" role="button">목록으로 돌아가기</a>
+  </div>
+
+</div>
+
+{% endblock %}
