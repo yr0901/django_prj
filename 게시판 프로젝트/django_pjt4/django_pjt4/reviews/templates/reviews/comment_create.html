@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+
+{% block body %}
+<form action="{% url 'reviews:comment_create' movie_pk review_pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form%}
+    <button>댓글달기</button>
+</form>
+{% endblock %}

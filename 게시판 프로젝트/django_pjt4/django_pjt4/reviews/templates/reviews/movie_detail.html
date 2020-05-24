@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>title : {{ movie.title }}</h1>
+    <h1>director : {{ movie.director }}</h1>
+    <h1>released_at : {{ movie.released_at }}</h1>
+    <hr>
+    <h3>Reviews</h3>
+    <form action="{% url 'reviews:review_create' movie.pk %}" method='GET'>
+      <button class= 'btn btn-primary'>리뷰 작성하기</button>
+    </form>
+
+    <hr>
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">title</th>
+      <th scope="col">rank</th>
+      <th scope="col">comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for review in movie.review_set.all %}
+    <tr>
+      <th scope="row">{{review.pk}}</th>
+      <td><a href="{% url 'reviews:review_detail' movie.pk review.pk %}">{{review.title}}</a></td>
+      <td>{{review.rank}}</td>
+      <td>{{review.comment_set.all.count}}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

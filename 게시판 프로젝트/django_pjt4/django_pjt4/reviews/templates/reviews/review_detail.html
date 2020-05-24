@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+<h1>{{ review.movie.title }}</h1>
+<hr>
+<a href="{% url 'accounts:user_detail' review.user.pk %}"><h3>{{review.user}}</h3></a>
+<h3>{{review.title}}</h3>
+<h3>{{review.content}}</h3>
+<h3>{{review.rank}}</h3>
+<h3>{{review.created_at}}</h3>
+<h3>{{review.updated_at}}</h3>
+{% if review.user == request.user %}
+    <form action="{% url 'reviews:review_update' review.movie.pk review.pk %}">
+        <button class='btn btn-info'>수정하기</button>
+    </form>
+    <form action="{% url 'reviews:review_delete' review.movie.pk review.pk %}">
+        <button class='btn btn-info'>삭제하기</button>
+    </form>
+{% endif %}
+<h3>Comments</h3>
+<hr>
+<a href="{% url 'reviews:comment_create' review.movie.pk review.pk %}">작성하기</a>
+{% for comment in review.comment_set.all %}
+<h5>{{comment.id }} : {{ comment.content }} 작성자 : <a href="{% url 'accounts:user_detail' comment.user.pk %}">{{ comment.user }}</a></h5>
+{% if comment.user == request.user %}
+    <form action="{% url 'reviews:comment_delete' review.movie.pk review.pk comment.pk %}" method='POST'>
+        {% csrf_token %}
+        <button class='btn btn-info'>삭제하기</button>
+    </form>
+{% endif %}
+{% endfor %}
+{% endblock %}
